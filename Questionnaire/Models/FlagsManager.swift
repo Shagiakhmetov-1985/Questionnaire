@@ -31,3 +31,10 @@ extension FlagsManager {
         return countries
     }
 }
+
+enum Checkmark {
+    case fiveQuestions
+    case tenQuestions
+    case fifteenQuestions
+    case twentyQuestions
+}

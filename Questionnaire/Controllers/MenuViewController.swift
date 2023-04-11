@@ -56,7 +56,10 @@ class MenuViewController: UIViewController {
     }
     
     @objc private func options() {
-        print("options")
+        let viewController = OptionsViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
 }
 

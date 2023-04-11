@@ -91,6 +91,7 @@
 		C328B2B429E483AD003099C0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C329F75229E5A3E7004AB055 /* OptionsTableViewCell */,
 				C328B2A229E481EF003099C0 /* MenuViewController.swift */,
 				C328B2B729E4975B003099C0 /* OptionsViewController.swift */,
 			);
@@ -111,6 +112,13 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C329F75229E5A3E7004AB055 /* OptionsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = OptionsTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
