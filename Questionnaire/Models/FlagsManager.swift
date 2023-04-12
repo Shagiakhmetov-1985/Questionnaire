@@ -32,9 +32,9 @@ extension FlagsManager {
     }
 }
 
-enum Checkmark {
-    case fiveQuestions
-    case tenQuestions
-    case fifteenQuestions
-    case twentyQuestions
+enum Checkmark: Int {
+    case fiveQuestions = 5
+    case tenQuestions = 10
+    case fifteenQuestions = 15
+    case twentyQuestions = 20
 }

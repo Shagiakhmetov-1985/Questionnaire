@@ -17,17 +17,10 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return tableView
     }()
     
-    private lazy var imageCheckmark: UIImageView = {
-        let imageView = UIImageView()
-        imageView.tintColor = .blue
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
     private let selectNumber = [
         "5 вопросов", "10 вопросов", "15 вопросов", "20 вопросов"
     ]
-    private var check = Checkmark.fiveQuestions
+    private var checkmark = Checkmark.fiveQuestions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,16 +40,31 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
         var content = cell.defaultContentConfiguration()
         content.text = title
         cell.contentConfiguration = content
-        cell.selectionStyle = .none
+        cell.accessoryType = checkmark(indexPath.row)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        switch indexPath.row {
+        case 0: checkmark = .fiveQuestions
+        case 1: checkmark = .tenQuestions
+        case 2: checkmark = .fifteenQuestions
+        default: checkmark = .twentyQuestions
+        }
+        
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        reloadCells(indexPath.row)
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.accessoryType = .none
+    private func reloadCells(_ index: Int) {
+        let count = selectNumber.count
+        for row in 0..<count {
+            if !(row == index) {
+                tableMenu.reloadRows(at: [IndexPath(row: row, section: 0)], with: .none)
+            }
+        }
     }
     
     private func setupSubviews(subviews: UIView...) {
@@ -66,11 +74,6 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     private func setupBarButton() {
-        let leftBarButton = UIBarButtonItem(
-            title: "Отмена",
-            image: .none,
-            target: self,
-            action: #selector(cancel))
         let rightBarButton = UIBarButtonItem(
             title: "Готово",
             image: .none,
@@ -79,7 +82,6 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         navigationItem.title = "Options"
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarButton
     }
     
@@ -93,20 +95,18 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
         navigationController?.navigationBar.compactAppearance = appearence
         navigationController?.navigationBar.scrollEdgeAppearance = appearence
     }
-    /*
+    
     private func checkmark(_ index: Int) -> UITableViewCell.AccessoryType {
         var accessory: UITableViewCell.AccessoryType
 
-        switch index {
-        case 0:
-        case 1:
-        case 2:
-        default:
+        switch checkmark {
+        case .fiveQuestions: accessory = index == 0 ? .checkmark : .none
+        case .tenQuestions: accessory = index == 1 ? .checkmark : .none
+        case .fifteenQuestions: accessory = index == 2 ? .checkmark : .none
+        default: accessory = index == 3 ? .checkmark : .none
         }
-    }
-    */
-    @objc private func cancel() {
-        dismiss(animated: true)
+        
+        return accessory
     }
     
     @objc private func done() {
