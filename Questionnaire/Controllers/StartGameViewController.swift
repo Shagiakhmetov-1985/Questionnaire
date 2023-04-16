@@ -21,6 +21,7 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.register(CustomCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = .systemBlue
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -30,6 +31,7 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
                          answerSecond: [FlagsManager],
                          answerThird: [FlagsManager],
                          answerFourth: [FlagsManager])!
+    var checkmark: Checkmark!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +51,7 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as! CustomHeader
-        view.title.text = "Question \(section + 1)"
+        view.title.text = "Вопрос \(section + 1)"
         view.image.image = UIImage(named: countQuestions.questions[section].flag)
         return view
     }
@@ -58,29 +60,49 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCell
         
         switch indexPath.row {
-        case 0: cell.title.text = countQuestions.answerFirst[indexPath.section].name
-        case 1: cell.title.text = countQuestions.answerSecond[indexPath.section].name
-        case 2: cell.title.text = countQuestions.answerThird[indexPath.section].name
-        default: cell.title.text = countQuestions.answerFourth[indexPath.section].name
+        case 0:
+            cell.title.text = countQuestions.answerFirst[indexPath.section].name
+            cell.image.image = checkImage(countQuestions.answerFirst[indexPath.section].select)
+            cell.image.tintColor = checkColor(countQuestions.answerFirst[indexPath.section].select)
+        case 1:
+            cell.title.text = countQuestions.answerSecond[indexPath.section].name
+            cell.image.image = checkImage(countQuestions.answerSecond[indexPath.section].select)
+            cell.image.tintColor = checkColor(countQuestions.answerSecond[indexPath.section].select)
+        case 2:
+            cell.title.text = countQuestions.answerThird[indexPath.section].name
+            cell.image.image = checkImage(countQuestions.answerThird[indexPath.section].select)
+            cell.image.tintColor = checkColor(countQuestions.answerThird[indexPath.section].select)
+        default:
+            cell.title.text = countQuestions.answerFourth[indexPath.section].name
+            cell.image.image = checkImage(countQuestions.answerFourth[indexPath.section].select)
+            cell.image.tintColor = checkColor(countQuestions.answerFourth[indexPath.section].select)
         }
         
-        cell.image.image = UIImage(systemName: "circle")
-        cell.image.tintColor = .red
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! CustomCell
+        
     }
     
     private func setupDesign() {
         tableQuestions.register(CustomHeader.self, forHeaderFooterViewReuseIdentifier: "header")
         tableQuestions.sectionHeaderHeight = 185
         tableQuestions.rowHeight = 55
+        tableQuestions.tintColor = .systemBlue
         setupSubviews(subviews: tableQuestions)
     }
     
     private func setupNavigationBar() {
         let appearence = UINavigationBarAppearance()
+        appearence.backgroundColor = .systemBlue
         navigationController?.navigationBar.standardAppearance = appearence
         navigationController?.navigationBar.compactAppearance = appearence
-        navigationController?.navigationBar.scrollEdgeAppearance = appearence
+        navigationController?.navigationBar.tintColor = .white
     }
     
     private func setupSubviews(subviews: UIView...) {
@@ -102,18 +124,33 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
             target: self,
             action: #selector(done))
         
-        navigationItem.title = "Questionnarie"
-        navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarButton
     }
     
     @objc private func backToMenu() {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func done() {
-        print("done!")
+        let resultsVC = ResultsViewController()
+        navigationController?.pushViewController(resultsVC, animated: true)
+    }
+    
+    private func checkImage(_ data: Bool) -> UIImage? {
+        if data {
+            return UIImage(systemName: "checkmark.circle")
+        } else {
+            return UIImage(systemName: "circle")
+        }
+    }
+    
+    private func checkColor(_ data: Bool) -> UIColor {
+        if data {
+            return UIColor.systemGreen
+        } else {
+            return UIColor.systemRed
+        }
     }
 }
 

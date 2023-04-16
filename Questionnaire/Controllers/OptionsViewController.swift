@@ -13,6 +13,7 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = .systemBlue
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -80,8 +81,6 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
             target: self,
             action: #selector(done))
         
-        navigationItem.title = "Options"
-        navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.rightBarButtonItem = rightBarButton
     }
     
@@ -90,10 +89,17 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     private func setupNavigationBar() {
+        navigationItem.title = "Options"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
         let appearence = UINavigationBarAppearance()
+        appearence.backgroundColor = .systemBlue
+        appearence.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearence.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navigationController?.navigationBar.standardAppearance = appearence
         navigationController?.navigationBar.compactAppearance = appearence
-        navigationController?.navigationBar.scrollEdgeAppearance = appearence
+        
+        navigationController?.navigationBar.tintColor = .white
     }
     
     private func checkmark(_ index: Int) -> UITableViewCell.AccessoryType {

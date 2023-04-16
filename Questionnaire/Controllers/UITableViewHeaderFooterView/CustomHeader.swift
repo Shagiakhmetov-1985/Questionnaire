@@ -21,7 +21,13 @@ class CustomHeader: UITableViewHeaderFooterView {
     }
     
     private func configure() {
-        title.font = UIFont.systemFont(ofSize: 22, weight: .light)
+        title.font = UIFont.systemFont(ofSize: 22, weight: .medium)
+        title.textColor = .white
+        
+        image.layer.borderWidth = 1
+        image.layer.borderColor = UIColor.black.cgColor
+        image.layer.cornerRadius = 10
+        image.clipsToBounds = true
         
         addSubviews(subviews: title, image)
         

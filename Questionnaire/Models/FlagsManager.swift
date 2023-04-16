@@ -10,6 +10,7 @@ import Foundation
 struct FlagsManager {
     let flag: String
     let name: String
+    let select: Bool
 }
 
 extension FlagsManager {
@@ -23,7 +24,8 @@ extension FlagsManager {
         for index in 0..<iterationCount {
             let information = FlagsManager(
                 flag: flags[index],
-                name: names[index]
+                name: names[index],
+                select: false
             )
             countries.append(information)
         }

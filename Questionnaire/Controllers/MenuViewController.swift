@@ -8,11 +8,13 @@
 import UIKit
 
 class MenuViewController: UIViewController {
-    private lazy var imageWallpaper: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Questions")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+    private lazy var labelHeading: UILabel = {
+        let label = UILabel()
+        label.text = "Questionnaire"
+        label.font = UIFont(name: "Copperplate", size: 40)
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var buttonStartGame: UIButton = {
@@ -39,14 +41,14 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDesign()
+        setupNavigationBar()
         setConstraints()
     }
     
     private func setupDesign() {
         startGameVC = StartGameViewController()
-        setupSubviews(subviews: imageWallpaper,
-                      buttonStartGame,
-                      buttonOptions)
+        setupSubviews(subviews: labelHeading, buttonStartGame, buttonOptions)
+        view.backgroundColor = .systemBlue
     }
     
     private func setupSubviews(subviews: UIView...) {
@@ -55,12 +57,17 @@ class MenuViewController: UIViewController {
         }
     }
     
+    private func setupNavigationBar() {
+        let appearence = UINavigationBarAppearance()
+        navigationController?.navigationBar.standardAppearance = appearence
+        navigationController?.navigationBar.compactAppearance = appearence
+    }
+    
     @objc private func startGame() {
         let startGameVC = StartGameViewController()
-        let navigationVC = UINavigationController(rootViewController: startGameVC)
-        navigationVC.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(startGameVC, animated: true)
         startGameVC.countQuestions = getQuestions()
-        present(navigationVC, animated: true)
+        startGameVC.checkmark = checkmark
     }
     
     @objc private func options() {
@@ -161,20 +168,22 @@ class MenuViewController: UIViewController {
 extension MenuViewController {
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            imageWallpaper.topAnchor.constraint(equalTo: view.topAnchor),
-            imageWallpaper.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageWallpaper.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageWallpaper.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            labelHeading.topAnchor.constraint(equalTo: view.topAnchor, constant: 130),
+            labelHeading.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            buttonStartGame.topAnchor.constraint(equalTo: view.topAnchor, constant: 265),
-            buttonStartGame.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            buttonStartGame.topAnchor.constraint(equalTo: view.topAnchor, constant: 330),
+            buttonStartGame.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buttonStartGame.widthAnchor.constraint(equalToConstant: 300),
+            buttonStartGame.heightAnchor.constraint(equalToConstant: 53)
         ])
         
         NSLayoutConstraint.activate([
-            buttonOptions.topAnchor.constraint(equalTo: view.topAnchor, constant: 320),
-            buttonOptions.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            buttonOptions.topAnchor.constraint(equalTo: buttonStartGame.bottomAnchor, constant: 8),
+            buttonOptions.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buttonOptions.widthAnchor.constraint(equalToConstant: 300),
+            buttonOptions.heightAnchor.constraint(equalToConstant: 53)
         ])
     }
 }
@@ -184,6 +193,9 @@ extension MenuViewController {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = UIFont(name: style, size: size)
+        button.backgroundColor = .white
+        button.tintColor = .systemBlue
+        button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }
