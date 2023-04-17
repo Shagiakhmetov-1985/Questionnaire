@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct FlagsManager {
+struct FlagsManager: Equatable {
     let flag: String
     let name: String
-    let select: Bool
+    var select: Bool
 }
 
 extension FlagsManager {

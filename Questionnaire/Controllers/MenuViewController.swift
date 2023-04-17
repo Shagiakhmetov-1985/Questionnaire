@@ -65,9 +65,8 @@ class MenuViewController: UIViewController {
     
     @objc private func startGame() {
         let startGameVC = StartGameViewController()
-        navigationController?.pushViewController(startGameVC, animated: true)
         startGameVC.countQuestions = getQuestions()
-        startGameVC.checkmark = checkmark
+        navigationController?.pushViewController(startGameVC, animated: true)
     }
     
     @objc private func options() {

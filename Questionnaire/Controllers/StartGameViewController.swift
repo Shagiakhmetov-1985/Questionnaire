@@ -31,7 +31,8 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
                          answerSecond: [FlagsManager],
                          answerThird: [FlagsManager],
                          answerFourth: [FlagsManager])!
-    var checkmark: Checkmark!
+    
+    private var resultsVC: ResultsViewControllerProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,15 +86,28 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! CustomCell
-        
+        switch indexPath.row {
+        case 0:
+            guard !(countQuestions.answerFirst[indexPath.section].select) else { return }
+            checkSelect(countQuestions.answerFirst, indexPath)
+        case 1:
+            guard !(countQuestions.answerSecond[indexPath.section].select) else { return }
+            checkSelect(countQuestions.answerSecond, indexPath)
+        case 2:
+            guard !(countQuestions.answerThird[indexPath.section].select) else { return }
+            checkSelect(countQuestions.answerThird, indexPath)
+        default:
+            guard !(countQuestions.answerFourth[indexPath.section].select) else { return }
+            checkSelect(countQuestions.answerFourth, indexPath)
+        }
+        tableView.reloadData()
     }
     
     private func setupDesign() {
+        resultsVC = ResultsViewController()
         tableQuestions.register(CustomHeader.self, forHeaderFooterViewReuseIdentifier: "header")
         tableQuestions.sectionHeaderHeight = 185
         tableQuestions.rowHeight = 55
-        tableQuestions.tintColor = .systemBlue
         setupSubviews(subviews: tableQuestions)
     }
     
@@ -134,6 +148,7 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @objc private func done() {
         let resultsVC = ResultsViewController()
+        resultsVC.countQuestions = countQuestions
         navigationController?.pushViewController(resultsVC, animated: true)
     }
     
@@ -151,6 +166,13 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
         } else {
             return UIColor.systemRed
         }
+    }
+    
+    private func checkSelect(_ answer: [FlagsManager],_ indexPath: IndexPath) {
+        countQuestions.answerFirst[indexPath.section].select = answer == countQuestions.answerFirst ? true : false
+        countQuestions.answerSecond[indexPath.section].select = answer == countQuestions.answerSecond ? true : false
+        countQuestions.answerThird[indexPath.section].select = answer == countQuestions.answerThird ? true : false
+        countQuestions.answerFourth[indexPath.section].select = answer == countQuestions.answerFourth ? true : false
     }
 }
 
