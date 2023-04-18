@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol MenuViewControllerProtocol {
+    
+}
+
 class MenuViewController: UIViewController {
     private lazy var labelHeading: UILabel = {
         let label = UILabel()
@@ -35,7 +39,11 @@ class MenuViewController: UIViewController {
         return button
     }()
     
-    private var checkmark = Checkmark.fiveQuestions
+    private var countQuestions = CountQuestions.fiveQuestions
+    private var continents = Continent.allCountries
+    
+    private var optionsManager: OptionsManager!
+    
     private var startGameVC: StartGameViewControllerProtocol!
     
     override func viewDidLoad() {
@@ -46,6 +54,7 @@ class MenuViewController: UIViewController {
     }
     
     private func setupDesign() {
+        optionsManager = StorageManager.shared.fetchOptions()
         startGameVC = StartGameViewController()
         setupSubviews(subviews: labelHeading, buttonStartGame, buttonOptions)
         view.backgroundColor = .systemBlue
@@ -77,18 +86,18 @@ class MenuViewController: UIViewController {
     }
     
     private func getRandomQuestions() -> [FlagsManager] {
-        FlagsManager.getFlags().shuffled()
+        FlagsManager.getAllCountries().shuffled()
     }
     
     private func countQuestions(_ questions: [FlagsManager]) -> [FlagsManager] {
-        var countQuestions: [FlagsManager] = []
-        let numbers = checkmark.rawValue
+        var count: [FlagsManager] = []
+        let numbers = countQuestions.rawValue
         
         for index in 0..<numbers {
-            countQuestions.append(questions[index])
+            count.append(questions[index])
         }
         
-        return countQuestions
+        return count
     }
     
     private func getChoosingAnswers(_ countQuestions: [FlagsManager], _ allQuestions: [FlagsManager]) -> [FlagsManager] {
@@ -129,7 +138,7 @@ class MenuViewController: UIViewController {
                                                            answerSecond: [FlagsManager],
                                                            answerThird: [FlagsManager],
                                                            answerFourth: [FlagsManager]) {
-        let countQuestions = checkmark.rawValue
+        let countQuestions = countQuestions.rawValue
         var first: [FlagsManager] = []
         var second: [FlagsManager] = []
         var third: [FlagsManager] = []

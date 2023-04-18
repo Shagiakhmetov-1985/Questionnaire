@@ -16,6 +16,8 @@
 		C328B2BA29E497D3003099C0 /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328B2B929E497D3003099C0 /* Flags.swift */; };
 		C328B2BC29E498AF003099C0 /* FlagsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328B2BB29E498AF003099C0 /* FlagsManager.swift */; };
 		C35D490629E81A9200189ED5 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D490529E81A9200189ED5 /* ResultsViewController.swift */; };
+		C3DEBFDF29EEF3C100BFE726 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEBFDE29EEF3C100BFE726 /* StorageManager.swift */; };
+		C3DEBFE129EEF92F00BFE726 /* OptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEBFE029EEF92F00BFE726 /* OptionsManager.swift */; };
 		C3E7EED929E6C29C0036E4F0 /* StartGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E7EED829E6C29C0036E4F0 /* StartGameViewController.swift */; };
 		C3E7EEDC29E6D0DB0036E4F0 /* CustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E7EEDB29E6D0DB0036E4F0 /* CustomHeader.swift */; };
 		C3E7EEDF29E6E2510036E4F0 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E7EEDE29E6E2510036E4F0 /* CustomCell.swift */; };
@@ -33,6 +35,8 @@
 		C328B2B929E497D3003099C0 /* Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flags.swift; sourceTree = "<group>"; };
 		C328B2BB29E498AF003099C0 /* FlagsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagsManager.swift; sourceTree = "<group>"; };
 		C35D490529E81A9200189ED5 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		C3DEBFDE29EEF3C100BFE726 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		C3DEBFE029EEF92F00BFE726 /* OptionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsManager.swift; sourceTree = "<group>"; };
 		C3E7EED829E6C29C0036E4F0 /* StartGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameViewController.swift; sourceTree = "<group>"; };
 		C3E7EEDB29E6D0DB0036E4F0 /* CustomHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeader.swift; sourceTree = "<group>"; };
 		C3E7EEDE29E6E2510036E4F0 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				C328B2B229E48388003099C0 /* Application */,
+				C3DEBFDD29EEF3AD00BFE726 /* StorageManager */,
 				C328B2B629E487E1003099C0 /* Views */,
 				C328B2B529E487D8003099C0 /* Models */,
 				C328B2B429E483AD003099C0 /* Controllers */,
@@ -114,6 +119,7 @@
 			children = (
 				C328B2B929E497D3003099C0 /* Flags.swift */,
 				C328B2BB29E498AF003099C0 /* FlagsManager.swift */,
+				C3DEBFE029EEF92F00BFE726 /* OptionsManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -123,6 +129,14 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C3DEBFDD29EEF3AD00BFE726 /* StorageManager */ = {
+			isa = PBXGroup;
+			children = (
+				C3DEBFDE29EEF3C100BFE726 /* StorageManager.swift */,
+			);
+			path = StorageManager;
 			sourceTree = "<group>";
 		};
 		C3E7EEDA29E6D0500036E4F0 /* UITableViewHeaderFooterView */ = {
@@ -213,6 +227,8 @@
 			files = (
 				C3E7EED929E6C29C0036E4F0 /* StartGameViewController.swift in Sources */,
 				C3E7EEDC29E6D0DB0036E4F0 /* CustomHeader.swift in Sources */,
+				C3DEBFE129EEF92F00BFE726 /* OptionsManager.swift in Sources */,
+				C3DEBFDF29EEF3C100BFE726 /* StorageManager.swift in Sources */,
 				C328B2A329E481EF003099C0 /* MenuViewController.swift in Sources */,
 				C35D490629E81A9200189ED5 /* ResultsViewController.swift in Sources */,
 				C328B2BA29E497D3003099C0 /* Flags.swift in Sources */,

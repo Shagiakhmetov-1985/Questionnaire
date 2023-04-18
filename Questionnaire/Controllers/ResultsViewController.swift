@@ -85,6 +85,8 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 countQuestions.questions[indexPath.section], countQuestions.answerFourth[indexPath.section])
         }
         
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.black.cgColor
         cell.selectionStyle = .none
         return cell
     }
@@ -159,7 +161,6 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         switch true {
         case question.flag == answer.flag:
             color = answer.select ? lightGreen : lightGreen
-            print("question: \(question), answer: \(answer)")
         case !(question.flag == answer.flag):
             color = answer.select ? lightRed : UIColor.white
         default: break

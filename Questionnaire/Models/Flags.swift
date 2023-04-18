@@ -103,4 +103,115 @@ class Flags {
     "Эквадор", "Экваториальная Гвинея", "Эритрея", "Эсватини", "Эстония",
     "Эфиопия", "Южная Георгия и Южные Сандвичевы", "ЮАР", "Южный Судан", "Ямайка",
     "Япония"]
+    
+    let imagesOfAmericanContinent = ["canada", "usa", "mexico", "bermuda",
+    "greenland", "saint-pierre and miquelon", "belize", "guatemala", "honduras",
+    "costa rica", "nicaragua", "panama", "el salvador", "antigua and barbuda",
+    "bahamas", "barbados", "haiti", "grenada", "dominica", "dominican republic",
+    "cuba", "saint vincent and grenadines", "saint kitts and nevis", "saint lucia",
+    "trinidad and tobago", "jamaica", "united states virgin islands", "anguilla",
+    "aruba", "bonaire", "british virgin islands", "guadepoule", "cayman islands",
+    "curacao", "martinique", "montserrat", "puerto rico", "saint-barthelemy",
+    "sint maarten", "turks and caicos islands", "argentina", "bolivia", "brazil",
+    "venezuela", "guyana", "colombia", "paraguay", "peru", "suriname", "uruguay",
+    "chile", "ecuador", "falkland islands", "south georgia and south sandwich",
+    "french guiana"]
+    
+    let countriesOfAmericanContinent = ["Канада", "США", "Мексика",
+    "Бермудские острова", "Гренландия", "Сен-Пьер и Микелон", "Белиз", "Гватемала",
+    "Гондурас", "Коста-Рика", "Никарагуа", "Панама", "Сальвадор", "Антигуа и Барбуда",
+    "Багамские острова", "Барбадос", "Гаити", "Гренада", "Доминика",
+    "Доминиканская республика", "Куба", "Сент-Винсент и Гренадины",
+    "Сент-Китс и Невис", "Сент-Люсия", "Тринидад и Тобаго", "Ямайка",
+    "Американские Виргинские острова", "Ангилья", "Аруба", "Бонэйр",
+    "Британские Виргинские острова", "Гвадепула", "Каймановы острова", "Кюрасао",
+    "Мартиника", "Монтсеррат", "Пуэрто-Рико", "Сен-Бартелеми", "Синт-Мартен",
+    "Острова Теркс и Кайкос", "Аргентина", "Боливия", "Бразилия", "Венесуэла",
+    "Гайана", "Колумбия", "Парагвай", "Перу", "Суринам", "Уругвай", "Чили",
+    "Эквадор", "Фолклендские острова", "Южная Георгия и Южные Сандвичевы",
+    "Французская Гвиана"]
+    
+    let imagesOfEuropeanContinent = ["austria", "aland islands", "belgium",
+    "great britain", "germany", "guernsey", "gibraltar", "jersey", "ireland",
+    "liechtenstein", "luxembourg", "monaco", "netherlands", "isle of man",
+    "france", "switzerland", "belarus", "bulgaria", "hungary", "moldova", "poland",
+    "russia", "romania", "slovakia", "czech", "ukraine", "denmark", "iceland",
+    "latvian", "lithuania", "norway", "finland", "estonia", "sweden", "albania",
+    "andorra", "bosnia and herzegovina", "vatican city", "greece", "spain",
+    "italy", "kosovo", "northern macedonia", "malta", "portugal", "san marino",
+    "serbia", "slovenia", "faroe islands", "croatia", "montenegro"]
+    
+    let countriesOfEuropeanContinent = ["Австрия", "Аландские острова", "Бельгия",
+    "Великобритания", "Германия", "Гернси", "Гибралтар", "Джерси", "Ирландия",
+    "Лихтенштейн", "Люксембург", "Монако", "Нидерланды", "Остров Мэн", "Франция",
+    "Швейцария", "Белорусь", "Болгария", "Венгрия", "Молдова", "Польша", "Россия",
+    "Румыния", "Словакия", "Чехия", "Украина", "Дания", "Исландия", "Латвия",
+    "Литва", "Норвегия", "Финляндия", "Эстония", "Швеция", "Албания", "Андорра",
+    "Босния и Герцеговина", "Ватикан", "Греция", "Испания", "Италия", "Косово",
+    "Северная Македония", "Мальта", "Португалия", "Сан-Марино", "Сербия",
+    "Словения", "Фарерские острова", "Хорватия", "Черногория"]
+    
+    let imagesOfAfricanContinent = ["algeria", "egypt", "western sahara", "libya",
+    "morocco", "sudan", "tunisia", "benin", "burkina-faso", "gambia", "ghana",
+    "guinea", "guinea-bissau", "cabo-verde", "ivory coast", "liberia", "mauritania",
+    "mali", "niger", "nigeria", "senegal", "sierra leone", "togo", "gabon",
+    "cameroon", "democratic republic of the congo", "republic congo",
+    "sao tome and principe", "central african republic", "chad", "equatorial guinea",
+    "burundi", "djibouti", "kenya", "rwanda", "somalia", "tanzania", "uganda",
+    "eritrea", "ethiopia", "south sudan", "angola", "bostwana", "zambia",
+    "zimbabwe", "comoros", "lesotho", "mauritius", "madagascar", "mayotte",
+    "malawi", "mozambique", "namibia", "reunion", "eswatini", "saint helena islands",
+    "seychelles islands", "eparse islands", "south africa"]
+    
+    let countriesOfAfricanContinent = ["Алжир", "Египет", "Западная Сахара",
+    "Ливия", "Марокко", "Судан", "Тунис", "Бенин", "Буркина-Фасо", "Гамбия",
+    "Гана", "Гвинея", "Гвинея-Бисау", "Кабо-Верде", "Кот-д'Ивуар", "Либерия",
+    "Мавритания", "Мали", "Нигер", "Нигерия", "Сенегал", "Сьерра-Леоне",
+    "Того", "Габон", "Камерун", "Демократическая Республика Конго",
+    "Республика Конго", "Сан-Томе и Принсипи", "Центральноафриканская Республика",
+    "Чад", "Экваториальная Гвинея", "Бурунди", "Джибути", "Кения", "Руанда",
+    "Сомали", "Танзания", "Уганда", "Эритрея", "Эфиопия", "Южный Судан",
+    "Ангола", "Ботсвана", "Замбия", "Зимбабве", "Коморские острова", "Лесото",
+    "Маврикий", "Мадагаскар", "Майотта", "Малави", "Мозамбик", "Намибия",
+    "Реюньон", "Эсватини", "Острова Святой Елены", "Сейшельские острова",
+    "Острова Эпарс", "ЮАР"]
+    
+    let imagesOfAsianContinent = ["azerbaijan", "armenia", "afghanistan",
+    "bangladesh", "bahrain", "british isles", "brunei", "bhutan", "east timor",
+    "vietnam", "georgia", "israel", "india", "indonesia", "jordan", "iraq",
+    "iran", "yemen", "kazakhstan", "cambodia", "qatar", "cyprus", "kyrgyzstan",
+    "china", "hong kong", "makau", "taiwan", "cocos islands", "north korea",
+    "south korea", "kuwait", "laos", "lebanon", "malaysia", "maldives",
+    "mongolia", "myanmar", "nepal", "uae", "oman", "christmas islands",
+    "pakistan", "palestine", "saudi arabia", "singapore", "syria", "tajikistan",
+    "thailand", "turkmenistan", "turkey", "uzbekistan", "philippines", "sri lanka",
+    "japan"]
+    
+    let countriesOfAsianContinent = ["Азербайджан", "Армения", "Афганистан",
+    "Бангладеш", "Бахрейн", "Британские острова", "Бруней", "Бутан",
+    "Восточный Тимор", "Вьетнам", "Грузия", "Израиль", "Индия", "Индонезия",
+    "Иордания", "Ирак", "Иран", "Йемен", "Казахстан", "Камбоджа", "Катар",
+    "Кипр", "Киргизия", "Китай", "Гонконг", "Макао", "Тайвань",
+    "Кокосовые острова", "КНДР", "Южная Корея", "Кувейт", "Лаос", "Ливан",
+    "Малайзия", "Мальдивские острова", "Монголия", "Мьянма", "Непал", "ОАЭ",
+    "Оман", "Остров Роджества", "Пакистан", "Палестина", "Саудовская Аравия",
+    "Сингапур", "Сирия", "Таджикистан", "Таиланд", "Туркменистан", "Турция",
+    "Узбекистан", "Филиппины", "Шри-Ланка", "Япония"]
+    
+    let imagesOfOceanContinent = ["australia", "vanuatu", "papua new guinea",
+    "solomon islands", "fiji", "kiribati", "marshall islands", "nauru",
+    "new zealand", "palau", "samoa", "tonga", "tuvalu", "micronesia",
+    "norfolk island", "new caledonia", "guam", "northern mariana islands",
+    "american samoa", "niue", "cook islands", "pitcairn islands", "tokelau",
+    "wallis and futuna", "french polynesia", "antarctica"]
+    
+    let countriesOfOceanContinent = ["Австралия", "Вануату",
+    "Папуа - Новая Гвинея", "Соломоновы острова", "Фиджи", "Кирибати",
+    "Маршалловы острова", "Науру", "Новая Зеландия", "Палау", "Самоа", "Тонга",
+    "Тувалу", "Микронезия", "Остров Норфолк", "Новая Каледония", "Гуам",
+    "Северные Марианские острова", "Американское Самоа", "Ниуэ", "Острова Кука",
+    "Острова Питкэрн", "Токелау", "Уоллис и Футуна", "Французская Полинезия",
+    "Антарктида"]
+    
+    private init() {}
 }
