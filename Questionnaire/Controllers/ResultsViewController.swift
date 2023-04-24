@@ -7,14 +7,6 @@
 
 import UIKit
 
-protocol ResultsViewControllerProtocol {
-    var questions: (questions: [FlagsManager],
-                    answerFirst: [FlagsManager],
-                    answerSecond: [FlagsManager],
-                    answerThird: [FlagsManager],
-                    answerFourth: [FlagsManager]) { get }
-}
-
 class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     private lazy var tableResults: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -177,15 +169,5 @@ extension ResultsViewController {
             tableResults.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableResults.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-    }
-}
-
-extension ResultsViewController: ResultsViewControllerProtocol {
-    var questions: (questions: [FlagsManager],
-                    answerFirst: [FlagsManager],
-                    answerSecond: [FlagsManager],
-                    answerThird: [FlagsManager],
-                    answerFourth: [FlagsManager]) {
-        countQuestions
     }
 }

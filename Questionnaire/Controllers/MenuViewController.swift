@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol MenuViewControllerProtocol {
-    
-}
-
 class MenuViewController: UIViewController {
     private lazy var labelHeading: UILabel = {
         let label = UILabel()
@@ -39,12 +35,21 @@ class MenuViewController: UIViewController {
         return button
     }()
     
-    private var countQuestions = CountQuestions.fiveQuestions
-    private var continents = Continent.allCountries
+    private lazy var labelMode: UILabel = {
+        let label = UILabel()
+        label.text = """
+        Count questions: \(countQuestions.rawValue)
+        Continent: \(continent.rawValue)
+        """
+        label.font = UIFont(name: "Copperplate", size: 20)
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
-    private var optionsManager: OptionsManager!
-    
-    private var startGameVC: StartGameViewControllerProtocol!
+    var countQuestions: CountQuestions!
+    var continent: Continent!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,9 +59,9 @@ class MenuViewController: UIViewController {
     }
     
     private func setupDesign() {
-        optionsManager = StorageManager.shared.fetchOptions()
-        startGameVC = StartGameViewController()
-        setupSubviews(subviews: labelHeading, buttonStartGame, buttonOptions)
+        countQuestions = StorageManager.shared.fetchOptions().0
+        continent = StorageManager.shared.fetchOptions().1
+        setupSubviews(subviews: labelHeading, buttonStartGame, buttonOptions, labelMode)
         view.backgroundColor = .systemBlue
     }
     
@@ -80,13 +85,22 @@ class MenuViewController: UIViewController {
     
     @objc private func options() {
         let optionsVC = OptionsViewController()
+        optionsVC.setOptions(questions: countQuestions, continents: continent)
+        optionsVC.delegate = self
         let navigationVC = UINavigationController(rootViewController: optionsVC)
         navigationVC.modalPresentationStyle = .fullScreen
         present(navigationVC, animated: true)
     }
     
     private func getRandomQuestions() -> [FlagsManager] {
-        FlagsManager.getAllCountries().shuffled()
+        switch continent {
+        case .allCountries: return FlagsManager.getAllCountries().shuffled()
+        case .americaContinent: return FlagsManager.getAmericanContinent().shuffled()
+        case .europeContinent: return FlagsManager.getEuropeanContinent().shuffled()
+        case .africaContinent: return FlagsManager.getAfricanContinent().shuffled()
+        case .asiaContinent: return FlagsManager.getAsianContinent().shuffled()
+        default: return FlagsManager.getOceanContinent().shuffled()
+        }
     }
     
     private func countQuestions(_ questions: [FlagsManager]) -> [FlagsManager] {
@@ -193,6 +207,11 @@ extension MenuViewController {
             buttonOptions.widthAnchor.constraint(equalToConstant: 300),
             buttonOptions.heightAnchor.constraint(equalToConstant: 53)
         ])
+        
+        NSLayoutConstraint.activate([
+            labelMode.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
+            labelMode.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
 }
 
@@ -209,3 +228,14 @@ extension MenuViewController {
     }
 }
 
+extension MenuViewController: OptionsViewControllerDelegate {
+    func getOptions(questions: CountQuestions, continents: Continent) {
+        countQuestions = questions
+        continent = continents
+
+        labelMode.text = """
+        Count questions: \(countQuestions.rawValue)
+        Continent: \(continent.rawValue)
+        """
+    }
+}

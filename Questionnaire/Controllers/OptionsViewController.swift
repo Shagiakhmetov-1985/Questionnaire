@@ -7,9 +7,8 @@
 
 import UIKit
 
-protocol OptionsViewControllerProtocol {
-    var getCountQuestions: CountQuestions { get }
-    var getContinents: Continent { get }
+protocol OptionsViewControllerDelegate: AnyObject {
+    func getOptions(questions: CountQuestions, continents: Continent)
 }
 
 class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -23,12 +22,13 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return tableView
     }()
     
+    weak var delegate: OptionsViewControllerDelegate?
+    
+    var checkmarkQuestions: CountQuestions!
+    var checkmarkContinents: Continent!
+    
     private let countQuestions = CountQuestions.allCases
-    private var checkmarkQuestions: CountQuestions!
-    
     private let continents = Continent.allCases
-    private var checkmarkContinents: Continent!
-    
     private let titleHeader = Options.allCases
     
     override func viewDidLoad() {
@@ -88,19 +88,26 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
             case 2: checkmarkQuestions = .fifteenQuestions
             default: checkmarkQuestions = .twentyQuestions
             }
+            StorageManager.shared.saveQuestions(checkmarkQuestions)
         default:
             switch indexPath.row {
             case 0: checkmarkContinents = .allCountries
             case 1: checkmarkContinents = .americaContinent
             case 2: checkmarkContinents = .europeContinent
             case 3: checkmarkContinents = .africaContinent
-            case 4: checkmarkContinents = .asiaCOntinent
+            case 4: checkmarkContinents = .asiaContinent
             default: checkmarkContinents = .oceaniaContinent
             }
+            StorageManager.shared.saveContinents(checkmarkContinents)
         }
         
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         reloadCells(indexPath.row, indexPath.section)
+    }
+    
+    func setOptions(questions: CountQuestions, continents: Continent) {
+        checkmarkQuestions = questions
+        checkmarkContinents = continents
     }
     
     private func reloadCells(_ index: Int,_ section: Int) {
@@ -179,7 +186,7 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
         case .americaContinent: accessory = index == 1 ? .checkmark : .none
         case .europeContinent: accessory = index == 2 ? .checkmark : .none
         case .africaContinent: accessory = index == 3 ? .checkmark : .none
-        case .asiaCOntinent: accessory = index == 4 ? .checkmark : .none
+        case .asiaContinent: accessory = index == 4 ? .checkmark : .none
         default: accessory = index == 5 ? .checkmark : .none
         }
         
@@ -187,6 +194,7 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @objc private func done() {
+        delegate?.getOptions(questions: checkmarkQuestions, continents: checkmarkContinents)
         dismiss(animated: true)
     }
 }
@@ -199,14 +207,5 @@ extension OptionsViewController {
             tableMenu.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableMenu.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-    }
-}
-
-extension OptionsViewController: OptionsViewControllerProtocol {
-    var getCountQuestions: CountQuestions {
-        checkmarkQuestions
-    }
-    var getContinents: Continent {
-        checkmarkContinents
     }
 }

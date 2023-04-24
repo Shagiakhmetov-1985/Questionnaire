@@ -138,11 +138,11 @@ enum CountQuestions: Int, CaseIterable {
 
 enum Continent: String, CaseIterable {
     case allCountries = "Все страны"
-    case americaContinent = "Континент Америки"
-    case europeContinent = "Континент Европы"
-    case africaContinent = "Континент Африки"
-    case asiaCOntinent = "Континент Азии"
-    case oceaniaContinent = "Континент Океании"
+    case americaContinent = "Америка"
+    case europeContinent = "Европа"
+    case africaContinent = "Африка"
+    case asiaContinent = "Азия"
+    case oceaniaContinent = "Океания"
 }
 
 enum Options: String, CaseIterable {

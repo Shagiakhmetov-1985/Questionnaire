@@ -7,14 +7,6 @@
 
 import UIKit
 
-protocol StartGameViewControllerProtocol {
-    var questions: (questions: [FlagsManager],
-                    answerFirst: [FlagsManager],
-                    answerSecond: [FlagsManager],
-                    answerThird: [FlagsManager],
-                    answerFourth: [FlagsManager]) { get }
-}
-
 class StartGameViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     private lazy var tableQuestions: UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
@@ -31,8 +23,6 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
                          answerSecond: [FlagsManager],
                          answerThird: [FlagsManager],
                          answerFourth: [FlagsManager])!
-    
-    private var resultsVC: ResultsViewControllerProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,7 +94,6 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     private func setupDesign() {
-        resultsVC = ResultsViewController()
         tableQuestions.register(CustomHeader.self, forHeaderFooterViewReuseIdentifier: "header")
         tableQuestions.sectionHeaderHeight = 185
         tableQuestions.rowHeight = 55
@@ -147,9 +136,26 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @objc private func done() {
+        guard findSelect(checkSelect(countQuestions.answerFirst)),
+              findSelect(checkSelect(countQuestions.answerSecond)),
+              findSelect(checkSelect(countQuestions.answerThird)),
+              findSelect(checkSelect(countQuestions.answerFourth)) else { return showAlert() }
+        
         let resultsVC = ResultsViewController()
         resultsVC.countQuestions = countQuestions
         navigationController?.pushViewController(resultsVC, animated: true)
+    }
+    
+    private func checkSelect(_ answers: [FlagsManager]) -> [Bool] {
+        answers.map { $0.select }
+    }
+    
+    private func findSelect(_ select: [Bool]) -> Bool {
+        select.contains(true) ? true : false
+    }
+    
+    private func showAlert() {
+        showAlert(title: "Внимание!", message: "Вы должны ответить на все вопросы, прежде чем перейдете к результатам!")
     }
     
     private func checkImage(_ data: Bool) -> UIImage? {
@@ -187,12 +193,13 @@ extension StartGameViewController {
     }
 }
 
-extension StartGameViewController: StartGameViewControllerProtocol {
-    var questions: (questions: [FlagsManager],
-                    answerFirst: [FlagsManager],
-                    answerSecond: [FlagsManager],
-                    answerThird: [FlagsManager],
-                    answerFourth: [FlagsManager]) {
-        countQuestions
+extension StartGameViewController {
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
 }

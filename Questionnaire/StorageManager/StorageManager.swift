@@ -11,18 +11,24 @@ class StorageManager {
     static let shared = StorageManager()
     
     private let userDefaults = UserDefaults.standard
-    private let optionsKey = "options"
+    private let questionsKey = "countQuestions"
+    private let continentsKey = "continents"
     
     private init() {}
     
-    func rewriteSetting(optionsManager: OptionsManager) {
-        guard let data = try? JSONEncoder().encode(optionsManager) else { return }
-        userDefaults.set(data, forKey: optionsKey)
+    func saveQuestions(_ countQuestions: CountQuestions) {
+        userDefaults.set(countQuestions.rawValue, forKey: questionsKey)
     }
     
-    func fetchOptions() -> OptionsManager {
-        guard let data = userDefaults.object(forKey: optionsKey) as? Data else { return OptionsManager(countQuestions: CountQuestions.fiveQuestions.rawValue, continents: Continent.allCountries.rawValue) }
-        guard let setting = try? JSONDecoder().decode(OptionsManager.self, from: data) else { return OptionsManager(countQuestions: CountQuestions.fiveQuestions.rawValue, continents: Continent.allCountries.rawValue) }
-        return setting
+    func saveContinents(_ continents: Continent) {
+        userDefaults.set(continents.rawValue, forKey: continentsKey)
+    }
+    
+    func fetchOptions() -> (CountQuestions, Continent) {
+        guard let questions = userDefaults.object(forKey: questionsKey) as? Int else { return (CountQuestions.fiveQuestions, Continent.allCountries) }
+        let getQuestions = CountQuestions(rawValue: questions) ?? CountQuestions.fiveQuestions
+        guard let continents = userDefaults.object(forKey: continentsKey) as? String else { return (CountQuestions.fiveQuestions, Continent.allCountries) }
+        let getContinents = Continent(rawValue: continents) ?? Continent.allCountries
+        return (getQuestions, getContinents)
     }
 }
