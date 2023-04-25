@@ -42,7 +42,7 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as! CustomHeader
-        view.title.text = "Вопрос \(section + 1)"
+        view.title.text = "Question \(section + 1)"
         view.image.image = UIImage(named: countQuestions.questions[section].flag)
         return view
     }
@@ -116,13 +116,13 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
     
     private func setupBarButton() {
         let leftBarButton = UIBarButtonItem(
-            title: "Главное меню",
+            title: "Back to menu",
             image: .none,
             target: self,
             action: #selector(backToMenu))
         
         let rightBarButton = UIBarButtonItem(
-            title: "Завершить",
+            title: "Finish",
             image: .none,
             target: self,
             action: #selector(done))
@@ -136,26 +136,23 @@ class StartGameViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @objc private func done() {
-        guard findSelect(checkSelect(countQuestions.answerFirst)),
-              findSelect(checkSelect(countQuestions.answerSecond)),
-              findSelect(checkSelect(countQuestions.answerThird)),
-              findSelect(checkSelect(countQuestions.answerFourth)) else { return showAlert() }
+        guard countSelect(countQuestions.answerFirst).count +
+            countSelect(countQuestions.answerSecond).count +
+            countSelect(countQuestions.answerThird).count +
+            countSelect(countQuestions.answerFourth).count ==
+                countQuestions.questions.count else { return showAlert() }
         
         let resultsVC = ResultsViewController()
         resultsVC.countQuestions = countQuestions
         navigationController?.pushViewController(resultsVC, animated: true)
     }
     
-    private func checkSelect(_ answers: [FlagsManager]) -> [Bool] {
-        answers.map { $0.select }
-    }
-    
-    private func findSelect(_ select: [Bool]) -> Bool {
-        select.contains(true) ? true : false
+    private func countSelect(_ answers: [FlagsManager]) -> [FlagsManager] {
+        answers.filter { $0.select == true }
     }
     
     private func showAlert() {
-        showAlert(title: "Внимание!", message: "Вы должны ответить на все вопросы, прежде чем перейдете к результатам!")
+        showAlert(title: "Choose answers!", message: "You must to answer all the questions before go to the results.")
     }
     
     private func checkImage(_ data: Bool) -> UIImage? {

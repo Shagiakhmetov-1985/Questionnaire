@@ -66,7 +66,7 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
         switch indexPath.section {
         case 0:
             let title = countQuestions[indexPath.row].rawValue
-            content.text = "\(title) вопросов"
+            content.text = "\(title) questions"
             cell.accessoryType = checkmarkQuestions(indexPath.row)
         default:
             let title = continents[indexPath.row].rawValue
@@ -137,7 +137,7 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     private func setupBarButton() {
         let rightBarButton = UIBarButtonItem(
-            title: "Готово",
+            title: "Done",
             image: .none,
             target: self,
             action: #selector(done))

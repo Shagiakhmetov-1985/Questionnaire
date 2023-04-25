@@ -42,7 +42,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as! CustomHeader
-        view.title.text = "Вопрос \(section + 1)"
+        view.title.text = "Question \(section + 1)"
         view.image.image = UIImage(named: countQuestions.questions[section].flag)
         return view
     }
@@ -111,7 +111,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     private func setupBarButton() {
         let rightBarButton = UIBarButtonItem(
-            title: "Завершить",
+            title: "Finish",
             image: .none,
             target: self,
             action: #selector(buttonFinish))
