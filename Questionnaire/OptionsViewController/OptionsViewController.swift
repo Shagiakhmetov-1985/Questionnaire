@@ -7,6 +7,14 @@
 
 import UIKit
 
+protocol OptionsViewInputProtocol: AnyObject {
+    func getMode(questions: CountQuestions, continents: Continent)
+}
+
+protocol OptionsViewOutputProtocol: AnyObject {
+    init(view: OptionsViewInputProtocol)
+}
+
 protocol OptionsViewControllerDelegate: AnyObject {
     func getOptions(questions: CountQuestions, continents: Continent)
 }
@@ -26,6 +34,8 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var checkmarkQuestions: CountQuestions!
     var checkmarkContinents: Continent!
+    
+    var presenter: OptionsViewOutputProtocol!
     
     private let countQuestions = CountQuestions.allCases
     private let continents = Continent.allCases
@@ -207,5 +217,12 @@ extension OptionsViewController {
             tableMenu.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableMenu.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+}
+
+extension OptionsViewController: OptionsViewInputProtocol {
+    func getMode(questions: CountQuestions, continents: Continent) {
+        checkmarkQuestions = questions
+        checkmarkContinents = continents
     }
 }

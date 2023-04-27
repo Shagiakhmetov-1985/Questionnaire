@@ -13,11 +13,13 @@ protocol MenuViewInputProtocol: AnyObject {
                                   answerSecond: [FlagsManager],
                                   answerThird: [FlagsManager],
                                   answerFourth: [FlagsManager]))
+    func getMode(questions: CountQuestions, continents: Continent)
 }
 
 protocol MenuViewOutputProtocol: AnyObject {
     init(view: MenuViewInputProtocol)
-    func getQuestions()
+    func viewDidLoad()
+    func didTapOptions(questions: CountQuestions, continent: Continent)
 }
 
 class MenuViewController: UIViewController {
@@ -61,8 +63,8 @@ class MenuViewController: UIViewController {
         return label
     }()
     
-    var countQuestions = StorageManager.shared.fetchOptions().0
-    var continent = StorageManager.shared.fetchOptions().1
+    var countQuestions: CountQuestions!
+    var continent: Continent!
     
     var totalQuestions: (questions: [FlagsManager],
                          answerFirst: [FlagsManager],
@@ -75,6 +77,8 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configurator.configure(with: self)
+        presenter.viewDidLoad()
         setupDesign()
         setupNavigationBar()
         setConstraints()
@@ -98,20 +102,20 @@ class MenuViewController: UIViewController {
     }
     
     @objc private func startGame() {
-        configurator.configure(with: self, and: countQuestions, and: continent)
-        presenter.getQuestions()
-        let startGameVC = StartGameViewController()
-        startGameVC.countQuestions = totalQuestions
-        navigationController?.pushViewController(startGameVC, animated: true)
+//        configurator.configure(with: self, and: countQuestions, and: continent)
+//        presenter.getQuestions()
+//
+//        let startGameVC = StartGameViewController()
+//        startGameVC.countQuestions = totalQuestions
+//        navigationController?.pushViewController(startGameVC, animated: true)
     }
     
     @objc private func options() {
         let optionsVC = OptionsViewController()
-        optionsVC.setOptions(questions: countQuestions, continents: continent)
+        let configurator: OptionsConfiguratorInputProtocol = OptionsConfigurator()
+        configurator.configure(with: optionsVC, and: countQuestions, and: continent)
+        presenter.didTapOptions(questions: countQuestions, continent: continent)
         optionsVC.delegate = self
-        let navigationVC = UINavigationController(rootViewController: optionsVC)
-        navigationVC.modalPresentationStyle = .fullScreen
-        present(navigationVC, animated: true)
     }
 }
 
@@ -175,5 +179,10 @@ extension MenuViewController: MenuViewInputProtocol {
                                   answerThird: [FlagsManager],
                                   answerFourth: [FlagsManager])) {
         totalQuestions = questions
+    }
+    
+    func getMode(questions: CountQuestions, continents: Continent) {
+        countQuestions = questions
+        continent = continents
     }
 }

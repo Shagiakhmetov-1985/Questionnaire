@@ -8,30 +8,34 @@
 import Foundation
 
 protocol MenuInteractorInputProtocol: AnyObject {
-    init(presenter: MenuInteractorOutputProtocol, questions: CountQuestions, continent: Continent)
-    func provideData()
+    init(presenter: MenuInteractorOutputProtocol)
+    func fetchData()
+    func sendData(questions: CountQuestions, continent: Continent)
 }
 
 protocol MenuInteractorOutputProtocol: AnyObject {
-    func receiveData(with data: MenuData)
+    func receiveMode(questions: CountQuestions, continents: Continent)
+    func sendData(questions: CountQuestions, continents: Continent)
 }
 
 class MenuInteractor: MenuInteractorInputProtocol {
     unowned let presenter: MenuInteractorOutputProtocol
-    private let countQuestions: CountQuestions
-    private let continent: Continent
     
-    required init(presenter: MenuInteractorOutputProtocol, questions: CountQuestions, continent: Continent) {
+    required init(presenter: MenuInteractorOutputProtocol) {
         self.presenter = presenter
-        self.countQuestions = questions
-        self.continent = continent
     }
     
-    func provideData() {
-        let data = MenuData(receiveQuestions: getQuestions())
-        presenter.receiveData(with: data)
+    func fetchData() {
+        let countQuestions = StorageManager.shared.fetchOptions().0
+        let continent = StorageManager.shared.fetchOptions().1
+        presenter.receiveMode(questions: countQuestions, continents: continent)
     }
     
+    func sendData(questions: CountQuestions, continent: Continent) {
+        presenter.sendData(questions: questions, continents: continent)
+    }
+    
+    /*
     private func getRandomQuestions() -> [FlagsManager] {
         switch continent {
         case .allCountries: return FlagsManager.getAllCountries().shuffled()
@@ -125,4 +129,5 @@ class MenuInteractor: MenuInteractorInputProtocol {
         
         return (countQuestions, answers.answerFirst, answers.answerSecond, answers.answerThird, answers.answerFourth)
     }
+     */
 }
