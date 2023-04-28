@@ -115,7 +115,6 @@ class MenuViewController: UIViewController {
         let configurator: OptionsConfiguratorInputProtocol = OptionsConfigurator()
         configurator.configure(with: optionsVC, and: countQuestions, and: continent)
         presenter.didTapOptions(questions: countQuestions, continent: continent)
-        optionsVC.delegate = self
     }
 }
 
@@ -159,7 +158,7 @@ extension MenuViewController {
         return button
     }
 }
-
+/*
 extension MenuViewController: OptionsViewControllerDelegate {
     func getOptions(questions: CountQuestions, continents: Continent) {
         countQuestions = questions
@@ -171,6 +170,7 @@ extension MenuViewController: OptionsViewControllerDelegate {
         """
     }
 }
+ */
 // MARK: - MenuViewInputProtocol
 extension MenuViewController: MenuViewInputProtocol {
     func getQuestions(questions: (questions: [FlagsManager],
@@ -184,5 +184,10 @@ extension MenuViewController: MenuViewInputProtocol {
     func getMode(questions: CountQuestions, continents: Continent) {
         countQuestions = questions
         continent = continents
+        
+        labelMode.text = """
+        Count questions: \(countQuestions.rawValue)
+        Continent: \(continent.rawValue)
+        """
     }
 }

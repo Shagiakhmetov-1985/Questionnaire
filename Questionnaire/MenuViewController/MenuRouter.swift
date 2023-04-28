@@ -20,9 +20,9 @@ class MenuRouter: MenuRouterInputProtocol {
     }
     
     func openOptionsViewController(with questions: CountQuestions, and continent: Continent) {
-        let optionsVC = OptionsViewController()
-        optionsVC.setOptions(questions: questions, continents: continent)
-        let navigationVC = UINavigationController(rootViewController: optionsVC)
+        let optionsVC: OptionsViewInputProtocol = OptionsViewController()
+        optionsVC.getMode(questions: questions, continents: continent)
+        let navigationVC = UINavigationController(rootViewController: optionsVC as! UIViewController)
         navigationVC.modalPresentationStyle = .fullScreen
         viewController.present(navigationVC, animated: true)
     }

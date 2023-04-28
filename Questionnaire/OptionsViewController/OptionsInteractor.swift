@@ -9,11 +9,11 @@ import Foundation
 
 protocol OptionsInteractorInputProtocol: AnyObject {
     init(presenter: OptionsInteractorOutputProtocol, questions: CountQuestions, continent: Continent)
-    func provideQuestions()
+    func backToMenu(questions: CountQuestions, continent: Continent)
 }
 
 protocol OptionsInteractorOutputProtocol: AnyObject {
-    func receiveMode(questions: CountQuestions, continents: Continent)
+    func sendDataToMenu(questions: CountQuestions, continent: Continent)
 }
 
 class OptionsInteractor: OptionsInteractorInputProtocol {
@@ -27,7 +27,7 @@ class OptionsInteractor: OptionsInteractorInputProtocol {
         self.continent = continent
     }
     
-    func provideQuestions() {
-        presenter.receiveMode(questions: countQuestions, continents: continent)
+    func backToMenu(questions: CountQuestions, continent: Continent) {
+        presenter.sendDataToMenu(questions: questions, continent: continent)
     }
 }

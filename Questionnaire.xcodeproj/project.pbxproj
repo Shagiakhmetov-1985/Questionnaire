@@ -20,6 +20,7 @@
 		C3DD247929FAA93E00D18763 /* OptionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DD247829FAA93E00D18763 /* OptionsPresenter.swift */; };
 		C3DD247B29FAA94E00D18763 /* OptionsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DD247A29FAA94E00D18763 /* OptionsInteractor.swift */; };
 		C3DD247D29FAD2B100D18763 /* MenuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DD247C29FAD2B100D18763 /* MenuRouter.swift */; };
+		C3DD247F29FBA7BE00D18763 /* OptionsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DD247E29FBA7BE00D18763 /* OptionsRouter.swift */; };
 		C3DEBFDF29EEF3C100BFE726 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEBFDE29EEF3C100BFE726 /* StorageManager.swift */; };
 		C3E7EED929E6C29C0036E4F0 /* StartGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E7EED829E6C29C0036E4F0 /* StartGameViewController.swift */; };
 		C3E7EEDC29E6D0DB0036E4F0 /* CustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E7EEDB29E6D0DB0036E4F0 /* CustomHeader.swift */; };
@@ -45,6 +46,7 @@
 		C3DD247829FAA93E00D18763 /* OptionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsPresenter.swift; sourceTree = "<group>"; };
 		C3DD247A29FAA94E00D18763 /* OptionsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsInteractor.swift; sourceTree = "<group>"; };
 		C3DD247C29FAD2B100D18763 /* MenuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRouter.swift; sourceTree = "<group>"; };
+		C3DD247E29FBA7BE00D18763 /* OptionsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsRouter.swift; sourceTree = "<group>"; };
 		C3DEBFDE29EEF3C100BFE726 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		C3E7EED829E6C29C0036E4F0 /* StartGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameViewController.swift; sourceTree = "<group>"; };
 		C3E7EEDB29E6D0DB0036E4F0 /* CustomHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeader.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				C328B2B729E4975B003099C0 /* OptionsViewController.swift */,
 				C3DD247829FAA93E00D18763 /* OptionsPresenter.swift */,
 				C3DD247A29FAA94E00D18763 /* OptionsInteractor.swift */,
+				C3DD247E29FBA7BE00D18763 /* OptionsRouter.swift */,
 				C3DD247629FAA5D500D18763 /* OptionsConfigurator.swift */,
 			);
 			path = OptionsViewController;
@@ -272,6 +275,7 @@
 				C3DD247B29FAA94E00D18763 /* OptionsInteractor.swift in Sources */,
 				C3DD247D29FAD2B100D18763 /* MenuRouter.swift in Sources */,
 				C328B29F29E481EF003099C0 /* AppDelegate.swift in Sources */,
+				C3DD247F29FBA7BE00D18763 /* OptionsRouter.swift in Sources */,
 				C328B2A129E481EF003099C0 /* SceneDelegate.swift in Sources */,
 				C3DD247729FAA5D500D18763 /* OptionsConfigurator.swift in Sources */,
 				C3E84F4229F7C69B00B876F8 /* MenuConfigurator.swift in Sources */,

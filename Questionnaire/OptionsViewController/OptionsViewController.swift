@@ -13,10 +13,7 @@ protocol OptionsViewInputProtocol: AnyObject {
 
 protocol OptionsViewOutputProtocol: AnyObject {
     init(view: OptionsViewInputProtocol)
-}
-
-protocol OptionsViewControllerDelegate: AnyObject {
-    func getOptions(questions: CountQuestions, continents: Continent)
+    func backToMenu(questions: CountQuestions, continent: Continent)
 }
 
 class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -30,12 +27,12 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return tableView
     }()
     
-    weak var delegate: OptionsViewControllerDelegate?
-    
     var checkmarkQuestions: CountQuestions!
     var checkmarkContinents: Continent!
     
     var presenter: OptionsViewOutputProtocol!
+    
+    private let configurator: OptionsConfiguratorInputProtocol = OptionsConfigurator()
     
     private let countQuestions = CountQuestions.allCases
     private let continents = Continent.allCases
@@ -43,6 +40,7 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configurator.configure(with: self, and: checkmarkQuestions, and: checkmarkContinents)
         setupBarButton()
         setupDesign()
         setupNavigationBar()
@@ -113,11 +111,6 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         reloadCells(indexPath.row, indexPath.section)
-    }
-    
-    func setOptions(questions: CountQuestions, continents: Continent) {
-        checkmarkQuestions = questions
-        checkmarkContinents = continents
     }
     
     private func reloadCells(_ index: Int,_ section: Int) {
@@ -204,8 +197,10 @@ class OptionsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @objc private func done() {
-        delegate?.getOptions(questions: checkmarkQuestions, continents: checkmarkContinents)
-        dismiss(animated: true)
+        let menuVC = MenuViewController()
+        let configurator: MenuConfiguratorInputProtocol = MenuConfigurator()
+        configurator.configure(with: menuVC)
+        presenter.backToMenu(questions: checkmarkQuestions, continent: checkmarkContinents)
     }
 }
 

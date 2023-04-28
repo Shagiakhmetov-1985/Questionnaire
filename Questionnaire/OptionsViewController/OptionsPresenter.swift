@@ -7,22 +7,22 @@
 
 import Foundation
 
-struct OptionsData {
-    let countQuestions: CountQuestions
-    let continent: Continent
-}
-
 class OptionsPresenter: OptionsViewOutputProtocol {
     unowned let view: OptionsViewInputProtocol
     var interactor: OptionsInteractorInputProtocol!
+    var router: OptionsRouterInputProtocol!
     
     required init(view: OptionsViewInputProtocol) {
         self.view = view
     }
+    
+    func backToMenu(questions: CountQuestions, continent: Continent) {
+        interactor.backToMenu(questions: questions, continent: continent)
+    }
 }
 
 extension OptionsPresenter: OptionsInteractorOutputProtocol {
-    func receiveMode(questions: CountQuestions, continents: Continent) {
-        view.getMode(questions: questions, continents: continents)
+    func sendDataToMenu(questions: CountQuestions, continent: Continent) {
+        router.closeOptionsViewController(with: questions, and: continent)
     }
 }
